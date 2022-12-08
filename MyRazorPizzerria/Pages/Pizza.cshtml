@@ -1,0 +1,41 @@
+﻿@page
+@model MyRazorPizzerria.Pages.PizzaModel
+@{
+}
+@*<a class="nav-link text-dark" asp-area="" asp-page="Forms/CustomPizza">Custom Pizza</a>
+<a class="nav-link text-dark" asp-area="" asp-page="/Checkout">Checkout</a>*@
+<div class="table-center">
+    <div class="mainText">
+        <h1 class="display-4 text-capitalize text-black">Our One Of A Kind Pizzas--></h1>
+        <h4>You Can Select From The Pizzas Below Or Make Your Own Pizza--></h4>
+        <h4>Once Selecting/Making Your Pizza Is Done, Go To Checkout--></h4>
+        <p class="smallText"><i>ONLY ONE PIZZA PER ORDER</i></p>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mb-5 mt-5">
+                    <div class="w-100 row makeYourOwnDiv">
+                        <div class="col-4">
+                            <img src="~/images/Pizzas/Create.png" class="w-100" />
+                        </div>
+                        <div class="col-8 align-center">
+                            <div class="align-middle MakeYourOwnText">
+                                <h3 style="text-align:left;">Create Your Own Pizza</h3>
+                                <p style="text-align:left;">Make Your Own Pizza By Selecting The Toppings You Want.</p>
+                                <a class="btn btn-primary" style="float:left" asp-area="" asp-page="Forms/CustomPizza">Try Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               @foreach (var pizza in Model.InMemoryPizzaDB)
+                {
+                    var imagePath = "~/images/Pizzas/" + (pizza.imageTitle + ".png");
+                    <div class="col-4 mb-5">
+                        <p class="mine"><b>@pizza.PizzaName</b></p>
+                        <a class="expand" asp-area="" asp-page="Checkout/Checkout" asp-route-imageTitle="@pizza.imageTitle" asp-route-PizzaPrice="@pizza.finalPrice" asp-route-PizzaName="@pizza.PizzaName"> <img src="@imagePath" class="w-100" asp-append-version="true" /></a>
+                    <br/>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
